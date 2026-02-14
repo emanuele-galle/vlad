@@ -84,6 +84,7 @@ export async function POST(request: NextRequest) {
       await fetch(N8N_WEBHOOK_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(10000),
         body: JSON.stringify({
           event: 'cancellation',
           client_name: appointment.clientName,

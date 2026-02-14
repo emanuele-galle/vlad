@@ -48,6 +48,18 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        source: '/images/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
+        source: '/icons/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=31536000, immutable' },
+        ],
+      },
+      {
         // Frontend pages: strict CSP without unsafe-eval
         source: '/((?!admin).*)',
         headers: [

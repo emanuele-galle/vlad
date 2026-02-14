@@ -26,7 +26,7 @@ export function AdminSidebar({ user }: AdminSidebarProps) {
       <div className="p-6 border-b border-[rgba(244,102,47,0.15)]">
         <Link href="/admin-panel" className="flex items-center gap-3">
           <Image
-            src="/images/logo/vlad-logo.png"
+            src="/images/logo/vlad-logo.webp"
             alt="Vlad Barber"
             width={40}
             height={50}

@@ -8,10 +8,10 @@ import { Instagram, Phone, ChevronDown } from 'lucide-react'
 
 const quickLinks = [
   { href: '/', label: 'Home' },
-  { href: '#about', label: 'Chi Siamo' },
-  { href: '#services', label: 'Servizi' },
-  { href: '#reviews', label: 'Recensioni' },
-  { href: '#contact', label: 'Contatti' },
+  { href: '/#about', label: 'Chi Siamo' },
+  { href: '/#services', label: 'Servizi' },
+  { href: '/#reviews', label: 'Recensioni' },
+  { href: '/#contact', label: 'Contatti' },
 ]
 
 const services = [
@@ -80,7 +80,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="mb-6 inline-block">
               <Image
-                src="/images/logo/vlad-logo.png"
+                src="/images/logo/vlad-logo.webp"
                 alt="Vlad Barber Logo"
                 width={80}
                 height={100}
@@ -198,7 +198,7 @@ export default function Footer() {
           <div className="text-center mb-8">
             <Link href="/" className="mb-4 inline-block">
               <Image
-                src="/images/logo/vlad-logo.png"
+                src="/images/logo/vlad-logo.webp"
                 alt="Vlad Barber Logo"
                 width={70}
                 height={85}

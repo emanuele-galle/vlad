@@ -8,21 +8,21 @@ const cinzel = Cinzel({
   variable: '--font-cinzel',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600', '700'],
 })
 
 const cormorant = Cormorant_Garamond({
   variable: '--font-cormorant',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600'],
 })
 
 const montserrat = Montserrat({
   variable: '--font-montserrat',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700'],
 })
 
 export const viewport: Viewport = {
@@ -109,9 +109,9 @@ const jsonLd = {
   description:
     'Vlad, barbiere professionista a Milano dal 2025. Taglio capelli uomo, barba, meches e trattamenti personalizzati. Prenota online il tuo appuntamento.',
   url: 'https://vlad.fodivps2.cloud',
-  logo: 'https://vlad.fodivps2.cloud/images/logo/vlad-logo.png',
+  logo: 'https://vlad.fodivps2.cloud/images/logo/vlad-logo.webp',
   image: [
-    'https://vlad.fodivps2.cloud/images/hero-bg.jpg',
+    'https://vlad.fodivps2.cloud/images/hero-bg.webp',
   ],
   telephone: '+39 000 000 0000',
   email: 'info@vladbarber.it',
@@ -261,6 +261,20 @@ export default function FrontendLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vlad.fodivps2.cloud' },
+                { '@type': 'ListItem', position: 2, name: 'Servizi', item: 'https://vlad.fodivps2.cloud/servizi' },
+                { '@type': 'ListItem', position: 3, name: 'Prenota', item: 'https://vlad.fodivps2.cloud/prenota' },
+              ],
+            }),
+          }}
         />
       </head>
       <body

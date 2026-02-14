@@ -148,7 +148,7 @@ export default function Header() {
               transition={{ duration: 0.3 }}
             >
               <Image
-                src="/images/logo/vlad-logo.png"
+                src="/images/logo/vlad-logo.webp"
                 alt="Vlad Barber Logo"
                 width={50}
                 height={60}

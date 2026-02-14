@@ -111,6 +111,7 @@ export const Appointments: CollectionConfig = {
             en: 'Date',
           },
           required: true,
+          index: true,
           admin: {
             date: {
               pickerAppearance: 'dayOnly',
@@ -151,6 +152,7 @@ export const Appointments: CollectionConfig = {
       ],
       defaultValue: 'confirmed',
       required: true,
+      index: true,
       admin: {
         position: 'sidebar',
       },
@@ -440,6 +442,7 @@ export const Appointments: CollectionConfig = {
                     await fetch(reviewWebhookUrl, {
                       method: 'POST',
                       headers: { 'Content-Type': 'application/json' },
+                      signal: AbortSignal.timeout(10000),
                       body: JSON.stringify({
                         event: 'review_request',
                         client_name: client.name,

@@ -31,7 +31,7 @@ export default function HeroSection() {
         {/* Background Image statico */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/hero-bg.jpg"
+            src="/images/hero-bg.webp"
             alt="Vlad Barber Milano"
             fill
             className="object-cover"
@@ -60,14 +60,17 @@ export default function HeroSection() {
                 textShadow: '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.5)'
               }}
             >
-              L&apos;Arte del{' '}
+              Vlad Barber{' '}
               <span
                 className="text-[#e8c882]"
                 style={{
                   textShadow: '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.5)'
                 }}
               >
-                Barbiere
+                Milano
+              </span>
+              <span className="block text-xl md:text-3xl lg:text-4xl mt-2 text-white/90 font-normal">
+                Il Tuo Barbiere di Fiducia
               </span>
             </h1>
 
@@ -78,7 +81,7 @@ export default function HeroSection() {
                 textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)'
               }}
             >
-              Vlad — Tradizione, precisione e passione dal 2025.
+              Tradizione, precisione e passione dal 2025.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -127,7 +130,7 @@ export default function HeroSection() {
       {/* Background Image with Parallax */}
       <motion.div className="absolute inset-0 z-0" style={{ y: backgroundY }}>
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/hero-bg.webp"
           alt="Vlad Barber Milano"
           fill
           className="object-cover scale-110"
@@ -171,14 +174,17 @@ export default function HeroSection() {
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.5)'
             }}
           >
-            L&apos;Arte del{' '}
+            Vlad Barber{' '}
             <span
               className="text-[#e8c882]"
               style={{
                 textShadow: '0 2px 4px rgba(0, 0, 0, 0.8), 0 4px 12px rgba(0, 0, 0, 0.5)'
               }}
             >
-              Barbiere
+              Milano
+            </span>
+            <span className="block text-xl md:text-3xl lg:text-4xl mt-2 text-white/90 font-normal">
+              Il Tuo Barbiere di Fiducia
             </span>
           </motion.h1>
 
@@ -192,7 +198,7 @@ export default function HeroSection() {
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)'
             }}
           >
-            Vlad — Tradizione, precisione e passione dal 2025.
+            Tradizione, precisione e passione dal 2025.
           </motion.p>
 
           <motion.div
