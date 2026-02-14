@@ -1,0 +1,39 @@
+services:
+  app:
+    container_name: vlad_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+        - PAYLOAD_SECRET=${PAYLOAD_SECRET}
+        - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}
+    restart: unless-stopped
+    env_file:
+      - .env.docker
+    networks:
+      - traefik-public
+      - panel-internal
+    labels:
+      - traefik.enable=true
+      # Preview router (Let's Encrypt)
+      - traefik.http.routers.vlad.rule=Host(`vlad.fodivps2.cloud`)
+      - traefik.http.routers.vlad.entrypoints=websecure
+      - traefik.http.routers.vlad.tls.certresolver=letsencrypt
+      - traefik.http.routers.vlad.middlewares=security-headers@file
+      - traefik.http.routers.vlad.service=vlad
+      # Service
+      - traefik.http.services.vlad.loadbalancer.server.port=3000
+      - traefik.docker.network=traefik-public
+    healthcheck:
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 90s
+
+networks:
+  traefik-public:
+    external: true
+  panel-internal:
+    external: true

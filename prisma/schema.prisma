@@ -1,0 +1,12 @@
+// Prisma schema - vlad
+// Note: The booking system uses Payload CMS collections (not Prisma).
+// This schema is kept minimal. Prisma is not actively used.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
