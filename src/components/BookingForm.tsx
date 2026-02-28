@@ -141,6 +141,7 @@ function AnimatedCheckmark() {
   )
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity -- Multi-step booking wizard with calendar, slots, form validation, and error handling
 export default function BookingForm() {
   const { client, isAuthenticated } = useClientAuth()
   const [step, setStep] = useState<Step>('service')
@@ -357,6 +358,7 @@ export default function BookingForm() {
     }
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity -- Handles submission with slot conflict recovery, duplicate booking detection, and error states
   const handleSubmit = async () => {
     const validation = validateBookingData(formData)
     if (!validation.valid) {

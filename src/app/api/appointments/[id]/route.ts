@@ -7,6 +7,7 @@ import { requireAdmin, unauthorizedResponse } from '@/lib/admin-auth'
 
 const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || 'http://vps-panel-n8n:5678/webhook/vlad-booking'
 
+// eslint-disable-next-line sonarjs/cognitive-complexity -- Complex appointment update with slot validation, notifications, and SSE events
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }

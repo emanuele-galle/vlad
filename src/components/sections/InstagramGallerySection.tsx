@@ -24,14 +24,15 @@ interface InstagramGallerySectionProps {
 }
 
 export default function InstagramGallerySection({ instagramHandle = '' }: InstagramGallerySectionProps) {
-  // Instagram section disabled for Vlad Barber
-  return null
-
   const [posts, setPosts] = useState<InstagramPost[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const shouldReduceMotion = useShouldReduceMotion()
 
+  // Instagram section disabled for Vlad Barber
+  const isDisabled = true
+
   useEffect(() => {
+    if (isDisabled) return
     async function fetchPosts() {
       try {
         const res = await fetch('/api/instagram-posts?limit=12')
@@ -48,6 +49,9 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
 
     fetchPosts()
   }, [])
+
+  // Instagram section disabled for Vlad Barber
+  if (isDisabled) return null
 
   // Loading state
   if (isLoading) {

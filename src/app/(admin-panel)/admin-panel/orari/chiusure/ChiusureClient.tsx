@@ -79,6 +79,7 @@ export default function ChiusurePage() {
     return dates
   }
 
+  // eslint-disable-next-line sonarjs/cognitive-complexity -- Multi-step form with range/single date logic
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 

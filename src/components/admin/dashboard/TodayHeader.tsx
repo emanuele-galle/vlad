@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
@@ -24,16 +25,15 @@ export function TodayHeader({ nextAppointment }: TodayHeaderProps) {
     year: 'numeric',
   })
 
-  // Calcola minuti mancanti al prossimo appuntamento
-  const getMinutesUntil = (time: string): number => {
-    const [hours, minutes] = time.split(':').map(Number)
+  // Calcola minuti mancanti al prossimo appuntamento (computed once on render via lazy state)
+  const [minutesUntilNext] = useState(() => {
+    if (!nextAppointment) return null
+    const [hours, minutes] = nextAppointment.time.split(':').map(Number)
     const appointmentTime = new Date()
     appointmentTime.setHours(hours, minutes, 0, 0)
     const diff = appointmentTime.getTime() - Date.now()
     return Math.max(0, Math.floor(diff / 60000))
-  }
-
-  const minutesUntilNext = nextAppointment ? getMinutesUntil(nextAppointment.time) : null
+  })
 
   return (
     <div className="admin-card p-6 relative overflow-hidden">

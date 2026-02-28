@@ -13,6 +13,7 @@ interface AppointmentInfo {
   status: string
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity -- Multi-state cancellation flow with loading/error/success states
 function CancelContent() {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')

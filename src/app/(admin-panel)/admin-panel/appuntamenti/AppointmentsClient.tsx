@@ -60,6 +60,7 @@ function addDays(d: Date, n: number): Date {
   return r
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity -- Large admin dashboard component with many stateful interactions
 export function AppointmentsClient() {
   const { showToast } = useToast()
   const showToastRef = useRef(showToast)
@@ -89,8 +90,7 @@ export function AppointmentsClient() {
 
   // Filters (collapsed by default on mobile)
   const [filtersOpen, setFiltersOpen] = useState(() => {
-    if (typeof window !== 'undefined' && window.innerWidth < 1024) return false
-    return true
+    return !(typeof window !== 'undefined' && window.innerWidth < 1024)
   })
   const [searchQuery, setSearchQuery] = useState('')
   const [debouncedSearch, setDebouncedSearch] = useState('')

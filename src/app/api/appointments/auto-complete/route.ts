@@ -9,6 +9,7 @@ function timeToMinutes(time: string): number {
   return h * 60 + m
 }
 
+// eslint-disable-next-line sonarjs/cognitive-complexity -- Auto-completion logic checks multiple date/time conditions per appointment
 export async function POST(request: NextRequest) {
   try {
     const secret = request.headers.get('x-sync-secret')

@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { useShouldReduceMotion } from '@/hooks/useIsMobile'
 
@@ -80,22 +81,23 @@ interface FloatingParticlesProps {
   color?: 'gold' | 'white'
 }
 
-export function FloatingParticles({ count = 20, color = 'gold' }: FloatingParticlesProps) {
+function FloatingParticles({ count = 20, color = 'gold' }: FloatingParticlesProps) {
   const shouldReduceMotion = useShouldReduceMotion()
 
-  // Su mobile: non renderizzare affatto le particelle (risparmio maggiore)
-  if (shouldReduceMotion) {
-    return null
-  }
-
-  const particles = Array.from({ length: count }, (_, i) => ({
+  // Generate particles once via lazy state initializer (avoids impure render calls)
+  const [particles] = useState(() => Array.from({ length: count }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
     size: Math.random() * 3 + 1,
     duration: Math.random() * 10 + 15,
     delay: Math.random() * 5,
-  }))
+  })))
+
+  // Su mobile: non renderizzare affatto le particelle (risparmio maggiore)
+  if (shouldReduceMotion) {
+    return null
+  }
 
   const colorClass = color === 'gold' ? 'bg-[#d4a855]' : 'bg-white'
 
@@ -131,7 +133,7 @@ interface GridPatternProps {
   opacity?: number
 }
 
-export function GridPattern({ opacity = 0.03 }: GridPatternProps) {
+function GridPattern({ opacity = 0.03 }: GridPatternProps) {
   return (
     <div
       className="absolute inset-0 pointer-events-none"
@@ -167,7 +169,7 @@ interface AnimatedLineProps {
   position?: 'top' | 'bottom' | 'left' | 'right'
 }
 
-export function AnimatedLine({ direction = 'horizontal', position = 'bottom' }: AnimatedLineProps) {
+function AnimatedLine({ direction = 'horizontal', position = 'bottom' }: AnimatedLineProps) {
   const shouldReduceMotion = useShouldReduceMotion()
   const isHorizontal = direction === 'horizontal'
 
@@ -195,6 +197,7 @@ export function AnimatedLine({ direction = 'horizontal', position = 'bottom' }: 
         className={`${isHorizontal ? 'h-px w-full' : 'w-px h-full'} bg-gradient-to-r from-transparent via-[#d4a855]/50 to-transparent`}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 1 }}
       />
     </div>
@@ -243,6 +246,7 @@ export function SectionDivider({ variant = 'gradient' }: SectionDividerProps) {
         className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4a855]/40 to-transparent"
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
+        viewport={{ once: true }}
         transition={{ duration: 1.5, ease: 'easeOut' }}
       />
     </div>
@@ -254,7 +258,7 @@ interface GlowingBorderProps {
   className?: string
 }
 
-export function GlowingBorder({ children, className = '' }: GlowingBorderProps) {
+function GlowingBorder({ children, className = '' }: GlowingBorderProps) {
   return (
     <div className={`relative group ${className}`}>
       <div className="absolute -inset-0.5 bg-gradient-to-r from-[#d4a855]/0 via-[#d4a855]/50 to-[#d4a855]/0 rounded-lg blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -264,7 +268,7 @@ export function GlowingBorder({ children, className = '' }: GlowingBorderProps) 
 }
 
 // Preset combinations for easy use
-export function BackgroundEffectsGold() {
+function BackgroundEffectsGold() {
   return (
     <>
       <GradientOrb color="gold" size="lg" position="top-right" delay={0} />
@@ -275,7 +279,7 @@ export function BackgroundEffectsGold() {
   )
 }
 
-export function BackgroundEffectsSubtle() {
+function BackgroundEffectsSubtle() {
   return (
     <>
       <GradientOrb color="dark" size="xl" position="center" animate={false} />
@@ -284,7 +288,7 @@ export function BackgroundEffectsSubtle() {
   )
 }
 
-export function BackgroundEffectsPremium() {
+function BackgroundEffectsPremium() {
   return (
     <>
       <GradientOrb color="gold" size="xl" position="top-right" delay={0} />
