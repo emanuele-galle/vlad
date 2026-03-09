@@ -15,12 +15,21 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: 'orderedIds array required' }, { status: 400 })
     }
 
+    // Fetch all services to include required localized fields in update
+    const allServices = await payload.find({ collection: 'services', limit: 100 })
+    const serviceMap = new Map(
+      allServices.docs.map((s) => [String(s.id), s.name as string])
+    )
+
     await Promise.all(
       orderedIds.map((id: string | number, index: number) =>
         payload.update({
           collection: 'services',
           id,
-          data: { order: index },
+          data: {
+            order: index,
+            name: serviceMap.get(String(id)) || '',
+          },
         })
       )
     )

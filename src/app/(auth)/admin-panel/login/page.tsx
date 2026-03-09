@@ -95,7 +95,7 @@ export default function AdminLoginPage() {
                   required
                   autoComplete="email"
                   className="admin-input pl-11"
-                  placeholder="admin@vladbarber.it"
+                  placeholder="info@vladbarber.it"
                 />
               </div>
             </div>
