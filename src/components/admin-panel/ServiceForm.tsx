@@ -171,7 +171,7 @@ export function ServiceForm({ service, isNew = false }: ServiceFormProps) {
               value={formData.duration}
               onChange={(e) => setFormData({ ...formData, duration: Number(e.target.value) })}
               required
-              min={15}
+              min={5}
               step={5}
               className="admin-input"
             />

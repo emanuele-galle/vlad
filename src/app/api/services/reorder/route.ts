@@ -1,0 +1,33 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import { requireAdmin, unauthorizedResponse } from '@/lib/admin-auth'
+
+export async function PUT(request: NextRequest) {
+  const user = await requireAdmin(request)
+  if (!user) return unauthorizedResponse()
+
+  try {
+    const payload = await getPayload({ config })
+    const { orderedIds } = await request.json()
+
+    if (!Array.isArray(orderedIds) || orderedIds.length === 0) {
+      return NextResponse.json({ error: 'orderedIds array required' }, { status: 400 })
+    }
+
+    await Promise.all(
+      orderedIds.map((id: string | number, index: number) =>
+        payload.update({
+          collection: 'services',
+          id,
+          data: { order: index },
+        })
+      )
+    )
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Error reordering services:', error)
+    return NextResponse.json({ error: 'Failed to reorder services' }, { status: 500 })
+  }
+}

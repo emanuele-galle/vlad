@@ -72,7 +72,7 @@ export const Services: CollectionConfig = {
         en: 'Duration (minutes)',
       },
       required: true,
-      min: 15,
+      min: 5,
       defaultValue: 30,
     },
     {
