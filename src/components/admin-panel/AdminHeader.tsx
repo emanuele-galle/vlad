@@ -59,10 +59,12 @@ export function AdminHeader({ user }: AdminHeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [notificationsOpen, setNotificationsOpen] = useState(false)
   const [notifications, setNotifications] = useState<Notification[]>(() => loadPersistedNotifications())
+  const [unreadCount, setUnreadCount] = useState(0)
   const [loading, setLoading] = useState(true)
   const [sseConnected, setSseConnected] = useState(false)
   const notificationRef = useRef<HTMLDivElement>(null)
   const eventSourceRef = useRef<EventSource | null>(null)
+  const isFirstFetchRef = useRef(true)
   const pathname = usePathname()
 
   // Play notification sound
@@ -125,6 +127,11 @@ export function AdminHeader({ user }: AdminHeaderProps) {
         const realtimeNotifs = prev.filter((n) => ['new_booking', 'cancellation', 'modification'].includes(n.type))
         const merged = [...realtimeNotifs, ...notifs]
         persistNotifications(merged)
+        // Set unread count on first load
+        if (isFirstFetchRef.current) {
+          isFirstFetchRef.current = false
+          setUnreadCount(merged.length)
+        }
         return merged
       })
     } catch (error) {
@@ -178,6 +185,7 @@ export function AdminHeader({ user }: AdminHeaderProps) {
               persistNotifications(updated)
               return updated
             })
+            setUnreadCount((prev) => prev + 1)
 
             playNotificationSound()
             showBrowserNotification(
@@ -260,13 +268,17 @@ export function AdminHeader({ user }: AdminHeaderProps) {
           {/* Notifications */}
           <div className="relative" ref={notificationRef}>
             <button
-              onClick={() => setNotificationsOpen(!notificationsOpen)}
+              onClick={() => {
+                const willOpen = !notificationsOpen
+                setNotificationsOpen(willOpen)
+                if (willOpen) setUnreadCount(0)
+              }}
               className="relative p-2 text-[rgba(255,255,255,0.6)] hover:text-white transition-colors"
             >
               <Bell className="w-5 h-5" />
-              {notifications.length > 0 && (
+              {unreadCount > 0 && (
                 <span className="absolute top-1 right-1 min-w-[18px] h-[18px] bg-[#F4662F] rounded-full text-[10px] font-bold text-white flex items-center justify-center px-1">
-                  {notifications.length}
+                  {unreadCount}
                 </span>
               )}
             </button>
@@ -279,7 +291,7 @@ export function AdminHeader({ user }: AdminHeaderProps) {
                   <div className="flex items-center gap-2">
                     {notifications.length > 0 && (
                       <span className="text-xs text-[rgba(255,255,255,0.5)]">
-                        {notifications.length} nuove
+                        {notifications.length}
                       </span>
                     )}
                     <span className={`w-2 h-2 rounded-full ${sseConnected ? 'bg-green-500' : 'bg-red-500'}`} title={sseConnected ? 'Live' : 'Disconnesso'} />
