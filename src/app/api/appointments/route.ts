@@ -60,6 +60,7 @@ async function sendBookingNotification(data: {
   const clientHtml = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #1a1a1a; color: #fff; border-radius: 12px; overflow: hidden;">
       <div style="background: #d4a855; padding: 24px; text-align: center;">
+        <img src="https://vladbarber.it/images/logo/vlad-logo.webp" alt="Vlad Barber Shop" width="60" height="60" style="display: block; margin: 0 auto 12px; border-radius: 8px;" />
         <h1 style="margin: 0; color: #0c0c0c; font-size: 24px;">Prenotazione Confermata</h1>
       </div>
       <div style="padding: 32px 24px;">
@@ -84,6 +85,9 @@ async function sendBookingNotification(data: {
   // Email di notifica all'admin
   const adminHtml = `
     <div style="font-family: Arial, sans-serif; max-width: 600px;">
+      <div style="text-align: center; margin-bottom: 16px;">
+        <img src="https://vladbarber.it/images/logo/vlad-logo.webp" alt="Vlad Barber Shop" width="50" height="50" style="border-radius: 8px;" />
+      </div>
       <h2>Nuova Prenotazione</h2>
       <p><strong>Cliente:</strong> ${data.client_name}</p>
       <p><strong>Email:</strong> ${data.client_email}</p>

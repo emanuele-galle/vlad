@@ -90,6 +90,9 @@ export async function POST(request: NextRequest) {
       to: process.env.EMAIL_FROM || 'info@vladbarber.it',
       subject: `Nuovo messaggio: ${subjectLabels[validSubject] || validSubject} — ${name.trim()}`,
       html: `<div style="font-family: Arial, sans-serif; max-width: 600px;">
+        <div style="text-align: center; margin-bottom: 16px;">
+          <img src="https://vladbarber.it/images/logo/vlad-logo.webp" alt="Vlad Barber Shop" width="50" height="50" style="border-radius: 8px;" />
+        </div>
         <h2>Nuovo messaggio dal sito</h2>
         <p><strong>Nome:</strong> ${name.trim()}</p>
         <p><strong>Email:</strong> ${email.trim()}</p>
