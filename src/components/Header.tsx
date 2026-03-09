@@ -148,11 +148,11 @@ export default function Header() {
               style={{ transform: isScrolled ? 'scale(0.85)' : 'scale(1)' }}
             >
               <Image
-                src="/images/logo/vlad-logo.webp"
-                alt="Vlad Barber Logo"
-                width={50}
-                height={60}
-                className="h-10 lg:h-12 w-auto transition-all duration-300"
+                src="/images/logo/vlad-logo-horizontal.webp"
+                alt="Vlad Barber Shop"
+                width={160}
+                height={50}
+                className="h-8 lg:h-10 w-auto transition-all duration-300"
                 priority
               />
             </div>

@@ -82,9 +82,9 @@ export default function Footer() {
               <Image
                 src="/images/logo/vlad-logo.webp"
                 alt="Vlad Barber Logo"
-                width={80}
-                height={100}
-                className="h-24 w-auto"
+                width={120}
+                height={150}
+                className="h-32 w-auto"
               />
             </Link>
             <p className="text-white/60 text-sm md:text-base mb-6">
@@ -200,9 +200,9 @@ export default function Footer() {
               <Image
                 src="/images/logo/vlad-logo.webp"
                 alt="Vlad Barber Logo"
-                width={70}
-                height={85}
-                className="h-20 w-auto mx-auto"
+                width={100}
+                height={120}
+                className="h-28 w-auto mx-auto"
               />
             </Link>
             <p className="text-white/60 text-sm mb-4">
