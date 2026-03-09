@@ -179,7 +179,7 @@ export default function AboutSection() {
                       className="text-2xl font-bold text-[#d4a855]"
                       style={{ fontFamily: 'var(--font-cinzel), serif' }}
                     >
-                      3+
+                      8+
                     </span>
                   </motion.div>
                   <p className="text-white/80 md:text-lg">Anni di Esperienza</p>

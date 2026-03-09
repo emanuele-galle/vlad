@@ -121,7 +121,7 @@ export default function Header() {
                 </a>
               </div>
               <div className="flex items-center gap-4 text-white/60">
-                <span>Lun 10-19, Mar-Sab 9-19</span>
+                <span>Mar-Sab 9-20 | Lun e Dom chiuso</span>
                 <span className="text-[#d4a855]/40">|</span>
                 <a
                   href="tel:+393205640409"
@@ -376,7 +376,7 @@ export default function Header() {
 
                   {/* Hours */}
                   <p className="text-center text-white/40 text-sm">
-                    Lun 10-19, Mar-Sab 9-19
+                    Mar-Sab 9-20 | Lun e Dom chiuso
                   </p>
                 </motion.div>
               </nav>

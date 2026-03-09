@@ -331,8 +331,8 @@ export default async function ServicePage({
                   <div className="flex items-center gap-3 text-white/60">
                     <Clock className="w-4 h-4 text-[#d4a855]" />
                     <div>
-                      <p>Lun: 10:00 - 19:00</p>
-                      <p>Mar-Sab: 09:00 - 19:00</p>
+                      <p>Mar-Sab: 09:00 - 20:00</p>
+                      <p>Lun e Dom: Chiuso</p>
                     </div>
                   </div>
                 </div>

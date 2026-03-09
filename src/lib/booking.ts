@@ -31,13 +31,13 @@ export interface ClosedDay {
 
 // Default opening hours (can be overridden from CMS)
 export const defaultOpeningHours: OpeningHour[] = [
-  { dayOfWeek: 0, openTime: '09:00', closeTime: '19:30', isClosed: true }, // Domenica - Chiuso
-  { dayOfWeek: 1, openTime: '09:00', closeTime: '19:30', isClosed: true }, // Lunedì - Chiuso
-  { dayOfWeek: 2, openTime: '09:00', closeTime: '19:30', isClosed: false }, // Martedì
-  { dayOfWeek: 3, openTime: '09:00', closeTime: '19:30', isClosed: false }, // Mercoledì
-  { dayOfWeek: 4, openTime: '09:00', closeTime: '19:30', isClosed: false }, // Giovedì
-  { dayOfWeek: 5, openTime: '09:00', closeTime: '19:30', isClosed: false }, // Venerdì
-  { dayOfWeek: 6, openTime: '09:00', closeTime: '19:30', isClosed: false }, // Sabato
+  { dayOfWeek: 0, openTime: '09:00', closeTime: '20:00', isClosed: true }, // Domenica - Chiuso
+  { dayOfWeek: 1, openTime: '09:00', closeTime: '20:00', isClosed: true }, // Lunedì - Chiuso
+  { dayOfWeek: 2, openTime: '09:00', closeTime: '20:00', isClosed: false }, // Martedì
+  { dayOfWeek: 3, openTime: '09:00', closeTime: '20:00', isClosed: false }, // Mercoledì
+  { dayOfWeek: 4, openTime: '09:00', closeTime: '20:00', isClosed: false }, // Giovedì
+  { dayOfWeek: 5, openTime: '09:00', closeTime: '20:00', isClosed: false }, // Venerdì
+  { dayOfWeek: 6, openTime: '09:00', closeTime: '20:00', isClosed: false }, // Sabato
 ]
 
 // Convert time string to minutes since midnight

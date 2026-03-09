@@ -184,9 +184,9 @@ export default function Footer() {
               <p className="text-white/60">
                 <span className="text-white">Orari:</span>
                 <br />
-                Lun: 10:00-19:00
+                Mar-Sab: 09:00-20:00
                 <br />
-                Mar-Sab: 09:00-19:00
+                Lun e Dom: Chiuso
               </p>
             </div>
           </div>
@@ -276,7 +276,7 @@ export default function Footer() {
                 </a>
               </p>
               <p className="text-white/60">
-                <span className="text-white">Orari:</span> Lun 10-19, Mar-Sab 9-19
+                <span className="text-white">Orari:</span> Mar-Sab 9-20 | Lun e Dom chiuso
               </p>
             </div>
           </AccordionSection>

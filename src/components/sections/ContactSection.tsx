@@ -29,8 +29,8 @@ const contactInfo = [
   {
     icon: Clock,
     label: 'Orari',
-    value: 'Mar-Sab: 09:00-19:00',
-    subValue: 'Lun: 10:00-19:00 | Dom: Chiuso',
+    value: 'Mar-Sab: 09:00-20:00',
+    subValue: 'Lun e Dom: Chiuso',
   },
 ]
 
