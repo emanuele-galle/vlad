@@ -33,7 +33,7 @@ export default function PrivacyPage() {
               <div className="text-white/70 space-y-2">
                 <p><strong className="text-white">Vlad Barber</strong></p>
                 <p>Via Domenica Cimarosa 5, 20144 Milano (MI)</p>
-                <p>P.IVA: __________</p>
+                <p>P.IVA: da definire</p>
                 <p>Telefono: +39 320 564 0409</p>
                 <p>Email: <a href="mailto:info@vladbarber.it" className="text-[#d4a855] hover:underline">info@vladbarber.it</a></p>
               </div>

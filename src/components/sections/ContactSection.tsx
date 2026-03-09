@@ -165,7 +165,7 @@ export default function ContactSection() {
               <p className="text-white/50 text-sm md:text-base mb-4">Seguici sui Social</p>
               <div className="flex gap-4">
                 <a
-                  href="#"
+                  href="https://www.instagram.com/vlad_barber_shop/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 rounded-xl bg-[#d4a855]/10 flex items-center justify-center hover:bg-[#d4a855]/20 transition-colors"

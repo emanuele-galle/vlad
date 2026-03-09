@@ -11,7 +11,7 @@ const navItems = [
   { href: '/#services', icon: Scissors, label: 'Servizi' },
   { href: '/prenota', icon: Calendar, label: 'Prenota', featured: true },
   { href: '/account', icon: UserCircle, label: 'Account' },
-  { href: 'tel:+39000000000', icon: Phone, label: 'Chiama', isExternal: true },
+  { href: 'tel:+393205640409', icon: Phone, label: 'Chiama', isExternal: true },
 ]
 
 export default function MobileNav() {

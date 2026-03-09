@@ -99,7 +99,7 @@ export default function TerminiPage() {
               </h2>
               <p className="text-white/70">
                 Per qualsiasi domanda relativa ai presenti termini, puoi contattarci al numero{" "}
-                <a href="tel:+39000000000" className="text-[#d4a855] hover:underline">
+                <a href="tel:+393205640409" className="text-[#d4a855] hover:underline">
                   +39 320 564 0409
                 </a>{" "}o via email a{" "}
                 <a href="mailto:info@vladbarber.it" className="text-[#d4a855] hover:underline">

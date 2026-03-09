@@ -159,14 +159,7 @@ const jsonLd = {
       name: 'Milano',
     },
   ],
-  sameAs: [],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: '5',
-    reviewCount: '50',
-    bestRating: '5',
-    worstRating: '1',
-  },
+  sameAs: ['https://www.instagram.com/vlad_barber_shop/'],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Servizi Barbiere',

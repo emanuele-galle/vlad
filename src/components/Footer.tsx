@@ -93,7 +93,7 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/vlad_barber_shop/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4a855]/20 transition-colors"
@@ -210,7 +210,7 @@ export default function Footer() {
             </p>
             <div className="flex justify-center gap-4">
               <a
-                href="#"
+                href="https://www.instagram.com/vlad_barber_shop/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4a855]/20 transition-colors"
