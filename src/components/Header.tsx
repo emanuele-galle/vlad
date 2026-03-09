@@ -150,9 +150,9 @@ export default function Header() {
               <Image
                 src="/images/logo/vlad-logo-horizontal.webp"
                 alt="Vlad Barber Shop"
-                width={160}
-                height={50}
-                className="h-8 lg:h-10 w-auto transition-all duration-300"
+                width={320}
+                height={100}
+                className="h-16 lg:h-20 w-auto transition-all duration-300"
                 priority
               />
             </div>
