@@ -66,7 +66,7 @@ export default async function Home() {
         <AboutSection />
         <ServicesSection services={services} />
         <CTABanner />
-        <InstagramGallerySection instagramHandle="" />
+        <InstagramGallerySection instagramHandle="vlad_barber_shop" />
         <ReviewsSection reviews={reviews} />
         <ContactSection />
       </main>

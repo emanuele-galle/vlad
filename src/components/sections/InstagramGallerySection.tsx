@@ -28,8 +28,7 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
   const [isLoading, setIsLoading] = useState(true)
   const shouldReduceMotion = useShouldReduceMotion()
 
-  // Instagram section disabled for Vlad Barber
-  const isDisabled = true
+  const isDisabled = false
 
   useEffect(() => {
     if (isDisabled) return
@@ -50,7 +49,6 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
     fetchPosts()
   }, [])
 
-  // Instagram section disabled for Vlad Barber
   if (isDisabled) return null
 
   // Loading state

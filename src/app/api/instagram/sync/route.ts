@@ -6,7 +6,7 @@ import sharp from 'sharp'
 
 const APIFY_API_TOKEN = process.env.APIFY_API_TOKEN
 const SYNC_SECRET = process.env.INSTAGRAM_SYNC_SECRET
-const INSTAGRAM_USERNAME = ''
+const INSTAGRAM_USERNAME = 'vlad_barber_shop'
 
 const s3Client = new S3Client({
   endpoint: process.env.S3_ENDPOINT || 'http://vps-panel-minio:9000',
