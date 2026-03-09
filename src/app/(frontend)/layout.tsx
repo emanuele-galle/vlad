@@ -103,24 +103,24 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'BarberShop',
-  '@id': 'https://vlad.fodivps2.cloud/#organization',
+  '@id': 'https://vladbarber.it/#organization',
   name: 'Vlad Barber',
   alternateName: ['Vlad Barber'],
   description:
     'Vlad, barbiere professionista a Milano dal 2025. Taglio capelli uomo, barba, meches e trattamenti personalizzati. Prenota online il tuo appuntamento.',
-  url: 'https://vlad.fodivps2.cloud',
-  logo: 'https://vlad.fodivps2.cloud/images/logo/vlad-logo.webp',
+  url: 'https://vladbarber.it',
+  logo: 'https://vladbarber.it/images/logo/vlad-logo.webp',
   image: [
-    'https://vlad.fodivps2.cloud/images/hero-bg.webp',
+    'https://vladbarber.it/images/hero-bg.webp',
   ],
-  telephone: '+39 000 000 0000',
+  telephone: '+39 320 564 0409',
   email: 'info@vladbarber.it',
   founder: {
     '@type': 'Person',
     name: 'Vlad',
     jobTitle: 'Barbiere Professionista',
     worksFor: {
-      '@id': 'https://vlad.fodivps2.cloud/#organization',
+      '@id': 'https://vladbarber.it/#organization',
     },
   },
   foundingDate: '2025',
@@ -269,9 +269,9 @@ export default function FrontendLayout({
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vlad.fodivps2.cloud' },
-                { '@type': 'ListItem', position: 2, name: 'Servizi', item: 'https://vlad.fodivps2.cloud/servizi' },
-                { '@type': 'ListItem', position: 3, name: 'Prenota', item: 'https://vlad.fodivps2.cloud/prenota' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://vladbarber.it' },
+                { '@type': 'ListItem', position: 2, name: 'Servizi', item: 'https://vladbarber.it/servizi' },
+                { '@type': 'ListItem', position: 3, name: 'Prenota', item: 'https://vladbarber.it/prenota' },
               ],
             }),
           }}

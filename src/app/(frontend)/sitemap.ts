@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 
-const BASE_URL = 'https://vlad.fodivps2.cloud'
+const BASE_URL = 'https://vladbarber.it'
 
 // Force dynamic rendering so Payload can query the DB at runtime
 export const dynamic = 'force-dynamic'

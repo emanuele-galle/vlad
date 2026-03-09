@@ -184,14 +184,14 @@ export default async function ServicePage({
         postalCode: '20144',
         addressCountry: 'IT',
       },
-      telephone: '+39 000 000 0000',
+      telephone: '+39 320 564 0409',
     },
     offers: {
       '@type': 'Offer',
       price: service.price,
       priceCurrency: 'EUR',
       availability: 'https://schema.org/InStock',
-      url: `https://vlad.fodivps2.cloud/servizi/${slug}`,
+      url: `https://vladbarber.it/servizi/${slug}`,
     },
     areaServed: {
       '@type': 'City',
@@ -324,8 +324,8 @@ export default async function ServicePage({
                   </div>
                   <div className="flex items-center gap-3 text-white/60">
                     <Phone className="w-4 h-4 text-[#d4a855]" />
-                    <a href="tel:+390000000000" className="hover:text-[#d4a855] transition-colors">
-                      000 000 0000
+                    <a href="tel:+393205640409" className="hover:text-[#d4a855] transition-colors">
+                      320 564 0409
                     </a>
                   </div>
                   <div className="flex items-center gap-3 text-white/60">

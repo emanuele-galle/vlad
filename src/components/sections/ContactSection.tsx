@@ -17,8 +17,8 @@ const contactInfo = [
   {
     icon: Phone,
     label: 'Telefono',
-    value: '+39 000 000 0000',
-    href: 'tel:+390000000000',
+    value: '+39 320 564 0409',
+    href: 'tel:+393205640409',
   },
   {
     icon: Mail,

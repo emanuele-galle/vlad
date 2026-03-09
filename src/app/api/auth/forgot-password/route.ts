@@ -3,10 +3,10 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { SignJWT } from 'jose'
 import { rateLimit, getClientIP, RATE_LIMITS } from '@/lib/rate-limit'
+import { sendEmail } from '@/lib/email'
 
 const secret = process.env.CLIENT_AUTH_SECRET || process.env.PAYLOAD_SECRET
 const RESET_SECRET = new TextEncoder().encode(secret + '-reset')
-const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || 'http://vps-panel-n8n:5678/webhook/vlad-booking'
 
 export async function POST(request: NextRequest) {
   try {
@@ -56,24 +56,30 @@ export async function POST(request: NextRequest) {
       .setExpirationTime('1h')
       .sign(RESET_SECRET)
 
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vlad.fodivps2.cloud'
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vladbarber.it'
     const resetLink = `${baseUrl}/account/reset-password?token=${resetToken}`
 
-    // Send reset email via N8N
-    try {
-      await fetch(N8N_WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event: 'password_reset',
-          client_name: client.name,
-          client_email: client.email,
-          resetLink,
-        }),
-      })
-    } catch (e) {
-      console.error('Failed to send reset email:', e)
-    }
+    // Send reset email via SMTP
+    await sendEmail({
+      to: client.email as string,
+      subject: 'Reimposta la tua password — Vlad Barber',
+      html: `<div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #1a1a1a; color: #fff; border-radius: 12px; overflow: hidden;">
+        <div style="background: #d4a855; padding: 24px; text-align: center;">
+          <h1 style="margin: 0; color: #0c0c0c; font-size: 24px;">Reimposta Password</h1>
+        </div>
+        <div style="padding: 32px 24px;">
+          <p>Ciao <strong>${client.name}</strong>,</p>
+          <p>Hai richiesto di reimpostare la tua password. Clicca il pulsante qui sotto:</p>
+          <div style="text-align: center; margin: 32px 0;">
+            <a href="${resetLink}" style="background: #d4a855; color: #0c0c0c; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold;">Reimposta Password</a>
+          </div>
+          <p style="font-size: 14px; color: #999;">Il link scade tra 1 ora. Se non hai richiesto tu il reset, ignora questa email.</p>
+        </div>
+        <div style="background: #111; padding: 16px; text-align: center; font-size: 12px; color: #666;">
+          Vlad Barber — Via Domenica Cimarosa 5, Milano
+        </div>
+      </div>`,
+    })
 
     return successResponse
   } catch (error) {

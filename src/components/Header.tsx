@@ -124,11 +124,11 @@ export default function Header() {
                 <span>Lun 10-19, Mar-Sab 9-19</span>
                 <span className="text-[#d4a855]/40">|</span>
                 <a
-                  href="tel:+390000000000"
+                  href="tel:+393205640409"
                   className="flex items-center gap-2 text-[#d4a855] hover:text-[#e8c882] transition-colors font-medium"
                 >
                   <Phone className="w-3.5 h-3.5" />
-                  <span>000 000 0000</span>
+                  <span>320 564 0409</span>
                 </a>
               </div>
             </div>
@@ -198,8 +198,8 @@ export default function Header() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.2 }}
-                  href="tel:+390000000000"
-                  aria-label="Chiama 000 000 0000"
+                  href="tel:+393205640409"
+                  aria-label="Chiama 320 564 0409"
                   className="flex items-center gap-2 text-[#d4a855] hover:text-[#e8c882] transition-colors"
                 >
                   <div className="w-9 h-9 rounded-full bg-[#d4a855]/10 flex items-center justify-center">
@@ -333,7 +333,7 @@ export default function Header() {
                   {/* Info cards */}
                   <div className="grid grid-cols-2 gap-3">
                     <a
-                      href="tel:+390000000000"
+                      href="tel:+393205640409"
                       className="flex flex-col items-center gap-2 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-[#d4a855]/30 transition-colors"
                     >
                       <div className="w-10 h-10 rounded-full bg-[#d4a855]/10 flex items-center justify-center">

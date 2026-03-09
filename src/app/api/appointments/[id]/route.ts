@@ -211,7 +211,7 @@ export async function PATCH(
             service_name: serviceName,
             date: dateFormatted,
             time: updated.time,
-            cancellationLink: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://vlad.fodivps2.cloud'}/cancella?token=${updated.cancellationToken}`,
+            cancellationLink: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://vladbarber.it'}/cancella?token=${updated.cancellationToken}`,
           }),
         })
       } catch (e) {

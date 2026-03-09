@@ -45,7 +45,7 @@ export default function CookiePage() {
                 <p><strong className="text-white">Vlad Barber</strong></p>
                 <p>Via Domenica Cimarosa 5, 20144 Milano (MI)</p>
                 <p>P.IVA: 03936920796</p>
-                <p>Telefono: +39 000 000 0000</p>
+                <p>Telefono: +39 320 564 0409</p>
                 <p>Email: <a href="mailto:info@vladbarber.it" className="text-[#d4a855] hover:underline">info@vladbarber.it</a></p>
               </div>
             </section>
@@ -200,7 +200,7 @@ export default function CookiePage() {
               <p className="text-white/70">
                 Per qualsiasi domanda relativa all&apos;uso dei cookie, puoi contattarci al numero{' '}
                 <a href="tel:+39000000000" className="text-[#d4a855] hover:underline">
-                  +39 000 000 0000
+                  +39 320 564 0409
                 </a>{' '}o via email a{' '}
                 <a href="mailto:info@vladbarber.it" className="text-[#d4a855] hover:underline">
                   info@vladbarber.it

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 const ALLOWED_ORIGINS = [
-  'https://vlad.fodivps2.cloud',
+  'https://vladbarber.it',
 ]
 
 export default function middleware(request: NextRequest) {

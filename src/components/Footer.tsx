@@ -102,7 +102,7 @@ export default function Footer() {
                 <Instagram className="w-5 h-5 text-[#d4a855]" />
               </a>
               <a
-                href="tel:+390000000000"
+                href="tel:+393205640409"
                 className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4a855]/20 transition-colors"
                 aria-label="Chiamaci"
               >
@@ -175,10 +175,10 @@ export default function Footer() {
                 <span className="text-white">Telefono:</span>
                 <br />
                 <a
-                  href="tel:+390000000000"
+                  href="tel:+393205640409"
                   className="hover:text-[#d4a855] transition-colors"
                 >
-                  +39 000 000 0000
+                  +39 320 564 0409
                 </a>
               </p>
               <p className="text-white/60">
@@ -219,7 +219,7 @@ export default function Footer() {
                 <Instagram className="w-5 h-5 text-[#d4a855]" />
               </a>
               <a
-                href="tel:+390000000000"
+                href="tel:+393205640409"
                 className="w-11 h-11 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#d4a855]/20 transition-colors"
                 aria-label="Chiamaci"
               >
@@ -269,10 +269,10 @@ export default function Footer() {
               <p className="text-white/60">
                 <span className="text-white">Telefono:</span>{' '}
                 <a
-                  href="tel:+390000000000"
+                  href="tel:+393205640409"
                   className="hover:text-[#d4a855] transition-colors"
                 >
-                  +39 000 000 0000
+                  +39 320 564 0409
                 </a>
               </p>
               <p className="text-white/60">

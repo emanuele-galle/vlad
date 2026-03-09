@@ -76,7 +76,7 @@ export default async function ServiziPage() {
       item: {
         '@type': 'Service',
         name: s.name,
-        url: `https://vlad.fodivps2.cloud/servizi/${s.slug}`,
+        url: `https://vladbarber.it/servizi/${s.slug}`,
         provider: {
           '@type': 'BarberShop',
           name: 'Vlad Barber',

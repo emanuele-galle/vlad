@@ -16,12 +16,16 @@ services:
       - panel-internal
     labels:
       - traefik.enable=true
-      # Preview router (Let's Encrypt)
-      - traefik.http.routers.vlad.rule=Host(`vlad.fodivps2.cloud`)
+      # Production router (vladbarber.it)
+      - traefik.http.routers.vlad.rule=Host(`vladbarber.it`) || Host(`www.vladbarber.it`)
       - traefik.http.routers.vlad.entrypoints=websecure
       - traefik.http.routers.vlad.tls.certresolver=letsencrypt
-      - traefik.http.routers.vlad.middlewares=security-headers@file
+      - traefik.http.routers.vlad.middlewares=security-headers@file,vlad-www-redirect
       - traefik.http.routers.vlad.service=vlad
+      # WWW redirect middleware
+      - traefik.http.middlewares.vlad-www-redirect.redirectregex.regex=^https://www\.vladbarber\.it/(.*)
+      - traefik.http.middlewares.vlad-www-redirect.redirectregex.replacement=https://vladbarber.it/$${1}
+      - traefik.http.middlewares.vlad-www-redirect.redirectregex.permanent=true
       # Service
       - traefik.http.services.vlad.loadbalancer.server.port=3000
       - traefik.docker.network=traefik-public

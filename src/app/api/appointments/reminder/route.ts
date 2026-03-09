@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     for (const apt of appointments.docs) {
       const serviceName = typeof apt.service === 'object' ? apt.service.name : 'Servizio'
-      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vlad.fodivps2.cloud'
+      const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vladbarber.it'
       const cancelLink = `${baseUrl}/cancella?token=${apt.cancellationToken}`
 
       const formattedDate = new Date(tomorrowStr).toLocaleDateString('it-IT', {

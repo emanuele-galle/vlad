@@ -69,7 +69,7 @@ export const SiteSettings: GlobalConfig = {
             it: 'Telefono',
             en: 'Phone',
           },
-          defaultValue: '+39 000 000 0000',
+          defaultValue: '+39 320 564 0409',
         },
         {
           name: 'email',

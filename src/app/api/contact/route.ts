@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { rateLimit, getClientIP, RATE_LIMITS } from '@/lib/rate-limit'
+import { sendEmail } from '@/lib/email'
 
 export async function POST(request: NextRequest) {
   try {
@@ -80,31 +81,25 @@ export async function POST(request: NextRequest) {
       },
     })
 
-    // Optionally trigger N8N webhook for notification
-    const n8nWebhookUrl = process.env.N8N_CONTACT_WEBHOOK_URL
-    if (n8nWebhookUrl) {
-      try {
-        await fetch(n8nWebhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            type: 'contact_submission',
-            data: {
-              id: submission.id,
-              name: submission.name,
-              email: submission.email,
-              phone: submission.phone,
-              subject: submission.subject,
-              message: submission.message,
-              createdAt: submission.createdAt,
-            },
-          }),
-        })
-      } catch (webhookError) {
-        // Don't fail the request if webhook fails
-        console.error('N8N webhook error:', webhookError)
-      }
+    // Send email notification to admin
+    const subjectLabels: Record<string, string> = {
+      info: 'Informazioni', booking: 'Prenotazione', collaboration: 'Collaborazione',
+      complaint: 'Reclamo', other: 'Altro',
     }
+    await sendEmail({
+      to: process.env.EMAIL_FROM || 'info@vladbarber.it',
+      subject: `Nuovo messaggio: ${subjectLabels[validSubject] || validSubject} — ${name.trim()}`,
+      html: `<div style="font-family: Arial, sans-serif; max-width: 600px;">
+        <h2>Nuovo messaggio dal sito</h2>
+        <p><strong>Nome:</strong> ${name.trim()}</p>
+        <p><strong>Email:</strong> ${email.trim()}</p>
+        ${phone ? `<p><strong>Telefono:</strong> ${phone.trim()}</p>` : ''}
+        <p><strong>Oggetto:</strong> ${subjectLabels[validSubject] || validSubject}</p>
+        <hr style="border: 1px solid #eee;" />
+        <p>${message.trim().replace(/\n/g, '<br>')}</p>
+      </div>`,
+      replyTo: email.trim().toLowerCase(),
+    })
 
     return NextResponse.json({
       success: true,

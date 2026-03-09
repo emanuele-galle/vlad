@@ -4,6 +4,7 @@ import config from '@payload-config'
 import { isSlotAvailable, defaultOpeningHours, isDateClosed } from '@/lib/booking'
 import { bookingEvents } from '@/lib/booking-events'
 import { rateLimit, getClientIP, RATE_LIMITS } from '@/lib/rate-limit'
+import { sendEmail } from '@/lib/email'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,8 +40,6 @@ async function getOpeningHours(payload: Awaited<ReturnType<typeof getPayload>>) 
   return defaultOpeningHours
 }
 
-const N8N_WEBHOOK_URL = process.env.N8N_WEBHOOK_URL || 'http://vps-panel-n8n:5678/webhook/vlad-booking'
-
 async function sendBookingNotification(data: {
   appointment_id: string
   client_name: string
@@ -55,14 +54,60 @@ async function sendBookingNotification(data: {
   price: string
   cancellationLink: string
 }) {
+  const dateFormatted = new Date(data.date).toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+
+  // Email al cliente
+  const clientHtml = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #1a1a1a; color: #fff; border-radius: 12px; overflow: hidden;">
+      <div style="background: #d4a855; padding: 24px; text-align: center;">
+        <h1 style="margin: 0; color: #0c0c0c; font-size: 24px;">Prenotazione Confermata</h1>
+      </div>
+      <div style="padding: 32px 24px;">
+        <p>Ciao <strong>${data.client_name}</strong>,</p>
+        <p>La tua prenotazione è stata confermata!</p>
+        <div style="background: #222; border-radius: 8px; padding: 20px; margin: 20px 0;">
+          <p style="margin: 8px 0;"><strong>Servizio:</strong> ${data.service_name}</p>
+          <p style="margin: 8px 0;"><strong>Data:</strong> ${dateFormatted}</p>
+          <p style="margin: 8px 0;"><strong>Ora:</strong> ${data.time}</p>
+          <p style="margin: 8px 0;"><strong>Durata:</strong> ${data.duration} min</p>
+          <p style="margin: 8px 0;"><strong>Prezzo:</strong> ${data.price}</p>
+        </div>
+        <p style="font-size: 14px; color: #999;">
+          Se hai bisogno di cancellare, <a href="${data.cancellationLink}" style="color: #d4a855;">clicca qui</a>.
+        </p>
+      </div>
+      <div style="background: #111; padding: 16px; text-align: center; font-size: 12px; color: #666;">
+        Vlad Barber — Via Domenica Cimarosa 5, Milano
+      </div>
+    </div>`
+
+  // Email di notifica all'admin
+  const adminHtml = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px;">
+      <h2>Nuova Prenotazione</h2>
+      <p><strong>Cliente:</strong> ${data.client_name}</p>
+      <p><strong>Email:</strong> ${data.client_email}</p>
+      <p><strong>Telefono:</strong> ${data.client_phone}</p>
+      <p><strong>Servizio:</strong> ${data.service_name} (${data.duration} min)</p>
+      <p><strong>Data:</strong> ${dateFormatted} alle ${data.time}</p>
+      <p><strong>Prezzo:</strong> ${data.price}</p>
+    </div>`
+
   try {
-    const response = await fetch(N8N_WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      signal: AbortSignal.timeout(10000),
-      body: JSON.stringify(data),
-    })
-    return response.ok
+    const results = await Promise.allSettled([
+      data.client_email ? sendEmail({
+        to: data.client_email,
+        subject: `Prenotazione confermata — ${data.service_name}`,
+        html: clientHtml,
+      }) : Promise.resolve(true),
+      sendEmail({
+        to: process.env.EMAIL_FROM || 'info@vladbarber.it',
+        subject: `Nuova prenotazione: ${data.client_name} — ${dateFormatted}`,
+        html: adminHtml,
+        replyTo: data.client_email || undefined,
+      }),
+    ])
+    return results.some(r => r.status === 'fulfilled' && r.value === true)
   } catch (error) {
     console.error('Failed to send booking notification:', error)
     return false
@@ -173,7 +218,7 @@ export async function POST(request: NextRequest) {
         const existingDate = new Date(existing.date as string).toLocaleDateString('it-IT', {
           weekday: 'long', day: 'numeric', month: 'long',
         })
-        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vlad.fodivps2.cloud'
+        const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vladbarber.it'
         const cancelLink = `${baseUrl}/cancella?token=${existing.cancellationToken}`
 
         return NextResponse.json(
@@ -298,7 +343,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Build cancellation link
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vlad.fodivps2.cloud'
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://vladbarber.it'
     const cancellationLink = `${baseUrl}/cancella?token=${appointment.cancellationToken}`
 
     // Send confirmation email via N8N webhook (only if email provided)
