@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { motion } from 'motion/react'
 import Link from 'next/link'
 import { MapPin, Phone, Clock, Mail, Calendar, Instagram, Send, Loader2, CheckCircle } from 'lucide-react'
 import { GradientOrb, NoiseTexture } from '@/components/BackgroundEffects'
@@ -88,11 +87,7 @@ export default function ContactSection() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center mb-16"
         >
           <p
@@ -108,16 +103,11 @@ export default function ContactSection() {
             Contatti
           </h2>
           <div className="gold-divider" />
-        </motion.div>
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Left: Contact Info + Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <div>
             <h3
               className="text-2xl md:text-3xl font-semibold text-white mb-8"
               style={{ fontFamily: 'var(--font-cinzel), serif' }}
@@ -126,13 +116,9 @@ export default function ContactSection() {
             </h3>
 
             <div className="space-y-6 mb-8">
-              {contactInfo.map((item, index) => (
-                <motion.div
+              {contactInfo.map((item) => (
+                <div
                   key={item.label}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.1 * index }}
                   className="flex items-start gap-4"
                 >
                   <div className="w-12 h-12 rounded-xl bg-[#d4a855]/10 flex items-center justify-center flex-shrink-0">
@@ -156,7 +142,7 @@ export default function ContactSection() {
                       <p className="text-white/60 text-sm md:text-base">{item.subValue}</p>
                     )}
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -183,15 +169,10 @@ export default function ContactSection() {
               <Calendar className="w-5 h-5" />
               Prenota un Appuntamento
             </Link>
-          </motion.div>
+          </div>
 
           {/* Right: Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
+          <div>
             <div className="bg-[#1a1a1a] rounded-2xl p-6 md:p-8 border border-white/5">
               <h3
                 className="text-xl md:text-2xl font-semibold text-white mb-6"
@@ -201,9 +182,7 @@ export default function ContactSection() {
               </h3>
 
               {success ? (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
+                <div
                   className="text-center py-8"
                 >
                   <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-green-500/10 flex items-center justify-center">
@@ -221,7 +200,7 @@ export default function ContactSection() {
                   >
                     Invia un altro messaggio
                   </button>
-                </motion.div>
+                </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Name & Email */}
@@ -319,15 +298,11 @@ export default function ContactSection() {
                 </form>
               )}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Map */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+        <div
           className="mt-12 relative rounded-xl overflow-hidden h-[300px]"
         >
           <iframe
@@ -341,7 +316,7 @@ export default function ContactSection() {
             className="grayscale"
           />
           <div className="absolute inset-0 pointer-events-none border border-[#d4a855]/20 rounded-xl" />
-        </motion.div>
+        </div>
       </div>
     </section>
   )

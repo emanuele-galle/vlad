@@ -1,6 +1,5 @@
 'use client'
 
-import { motion, AnimatePresence } from 'motion/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
@@ -222,7 +221,7 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
     )
   }
 
-  // Desktop version with animations
+  // Desktop version
   return (
     <section id="gallery" className="section-padding bg-[#151515] relative overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
@@ -232,11 +231,7 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center mb-12"
         >
           <p
@@ -253,76 +248,64 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
             I Nostri Lavori
           </h2>
           <div className="gold-divider" />
-        </motion.div>
+        </div>
 
         {/* Grid */}
-        <motion.div
-          layout
+        <div
           className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
         >
-          <AnimatePresence mode="popLayout">
-            {posts.map((post, index) => (
-              <motion.a
-                key={post.id}
-                href={post.permalink}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${post.caption?.slice(0, 50) || 'Post Instagram'} (apre Instagram)`}
-                layout
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                transition={{ duration: 0.4, delay: 0.05 * index }}
-                className={`relative overflow-hidden rounded-lg group cursor-pointer ${
-                  index === 0 ? 'md:col-span-2 md:row-span-2' : ''
-                }`}
-                style={{ aspectRatio: '1' }}
-              >
-                <Image
-                  src={post.thumbnailUrl || post.mediaUrl}
-                  alt={post.caption?.slice(0, 50) || 'Instagram post'}
-                  fill
-                  className="gallery-image-zoom object-cover"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
+          {posts.map((post, index) => (
+            <a
+              key={post.id}
+              href={post.permalink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${post.caption?.slice(0, 50) || 'Post Instagram'} (apre Instagram)`}
+              className={`relative overflow-hidden rounded-lg group cursor-pointer ${
+                index === 0 ? 'md:col-span-2 md:row-span-2' : ''
+              }`}
+              style={{ aspectRatio: '1' }}
+            >
+              <Image
+                src={post.thumbnailUrl || post.mediaUrl}
+                alt={post.caption?.slice(0, 50) || 'Instagram post'}
+                fill
+                className="gallery-image-zoom object-cover"
+                sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+              />
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/95 via-[#0c0c0c]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/95 via-[#0c0c0c]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                {/* Instagram Icon */}
-                <div className="absolute top-3 right-3 p-2 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                  <Instagram className="w-4 h-4 text-white" />
+              {/* Instagram Icon */}
+              <div className="absolute top-3 right-3 p-2 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                <Instagram className="w-4 h-4 text-white" />
+              </div>
+
+              {/* Video/Carousel indicator */}
+              {post.mediaType !== 'IMAGE' && (
+                <div className="absolute top-3 left-3 px-2 py-1 bg-black/50 rounded text-xs text-white">
+                  {post.mediaType === 'VIDEO' ? 'Video' : 'Carousel'}
                 </div>
+              )}
 
-                {/* Video/Carousel indicator */}
-                {post.mediaType !== 'IMAGE' && (
-                  <div className="absolute top-3 left-3 px-2 py-1 bg-black/50 rounded text-xs text-white">
-                    {post.mediaType === 'VIDEO' ? 'Video' : 'Carousel'}
-                  </div>
-                )}
-
-                {/* External link indicator */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="w-12 h-12 rounded-full bg-[#d4a855]/80 flex items-center justify-center">
-                    <ExternalLink className="w-6 h-6 text-[#0c0c0c]" />
-                  </div>
+              {/* External link indicator */}
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="w-12 h-12 rounded-full bg-[#d4a855]/80 flex items-center justify-center">
+                  <ExternalLink className="w-6 h-6 text-[#0c0c0c]" />
                 </div>
+              </div>
 
-                {/* Caption on hover */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                  <p className="text-white text-sm md:text-base line-clamp-3">{post.caption || ''}</p>
-                </div>
-              </motion.a>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+              {/* Caption on hover */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <p className="text-white text-sm md:text-base line-clamp-3">{post.caption || ''}</p>
+              </div>
+            </a>
+          ))}
+        </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <div
           className="text-center mt-12"
         >
           <a
@@ -335,7 +318,7 @@ export default function InstagramGallerySection({ instagramHandle = '' }: Instag
             Vedi tutto su Instagram
             <ExternalLink className="w-4 h-4" />
           </a>
-        </motion.div>
+        </div>
       </div>
 
       <SectionDivider variant="simple" />

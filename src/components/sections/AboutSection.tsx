@@ -1,9 +1,7 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'motion/react'
 import Image from 'next/image'
 import { Award, Heart, Scissors, Users } from 'lucide-react'
-import { useRef } from 'react'
 import { GradientOrb, NoiseTexture, SectionDivider } from '@/components/BackgroundEffects'
 
 const features = [
@@ -30,18 +28,9 @@ const features = [
 ]
 
 export default function AboutSection() {
-  const sectionRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  })
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50])
-  const contentY = useTransform(scrollYProgress, [0, 1], [30, -30])
-
   return (
     <>
-      <section ref={sectionRef} id="about" className="section-padding bg-[#0c0c0c] relative overflow-hidden">
+      <section id="about" className="section-padding bg-[#0c0c0c] relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           <GradientOrb color="dark" size="lg" position="top-right" blur="xl" animate={false} />
@@ -50,57 +39,28 @@ export default function AboutSection() {
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <motion.p
-              initial={{ opacity: 0, letterSpacing: '0.2em' }}
-              whileInView={{ opacity: 1, letterSpacing: '0.3em' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-[#d4a855] text-sm md:text-lg uppercase mb-4"
+          <div className="text-center mb-16">
+            <p
+              className="text-[#d4a855] text-sm md:text-lg tracking-[0.3em] uppercase mb-4"
               style={{ fontFamily: 'var(--font-cormorant), serif' }}
             >
               La Mia Storia
-            </motion.p>
+            </p>
             <h2
               className="text-3xl md:text-5xl font-bold text-white mb-4"
               style={{ fontFamily: 'var(--font-cinzel), serif' }}
             >
               Chi Siamo
             </h2>
-            <motion.div
-              initial={{ scaleX: 0 }}
-              whileInView={{ scaleX: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              className="gold-divider origin-center"
-            />
-          </motion.div>
+            <div className="gold-divider" />
+          </div>
 
           {/* Content Grid */}
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Images with Parallax */}
-            <motion.div
-              style={{ y: imageY }}
-              className="grid grid-cols-2 gap-4"
-            >
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="space-y-4"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative h-64 rounded-lg overflow-hidden group"
-                >
+            {/* Images */}
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-4">
+                <div className="relative h-64 rounded-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
                   <Image
                     src="/images/gallery-2.webp"
                     alt="Vlad Barber - taglio capelli uomo Milano"
@@ -108,12 +68,8 @@ export default function AboutSection() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative h-48 rounded-lg overflow-hidden group"
-                >
+                </div>
+                <div className="relative h-48 rounded-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
                   <Image
                     src="/images/pennello-barbiere.webp"
                     alt="Strumenti da barbiere professionali a Milano"
@@ -121,20 +77,10 @@ export default function AboutSection() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="space-y-4 pt-8"
-              >
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative h-48 rounded-lg overflow-hidden group"
-                >
+                </div>
+              </div>
+              <div className="space-y-4 pt-8">
+                <div className="relative h-48 rounded-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
                   <Image
                     src="/images/rasatura-barba.webp"
                     alt="Rasatura barba tradizionale a Milano"
@@ -142,12 +88,8 @@ export default function AboutSection() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
-                <motion.div
-                  whileHover={{ scale: 1.03 }}
-                  transition={{ duration: 0.3 }}
-                  className="relative h-64 rounded-lg overflow-hidden group"
-                >
+                </div>
+                <div className="relative h-64 rounded-lg overflow-hidden group hover:scale-[1.03] transition-transform duration-300">
                   <Image
                     src="/images/gallery-4.webp"
                     alt="Interno Vlad Barber Shop Milano"
@@ -155,33 +97,22 @@ export default function AboutSection() {
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0c0c0c]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </motion.div>
-              </motion.div>
-            </motion.div>
+                </div>
+              </div>
+            </div>
 
-            {/* Text Content with Parallax */}
-            <motion.div style={{ y: contentY }}>
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
+            {/* Text Content */}
+            <div>
+              <div>
                 <div className="flex items-center gap-4 mb-6">
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, type: 'spring' }}
-                    className="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4a855]/20 to-[#d4a855]/5 flex items-center justify-center border border-[#d4a855]/20"
-                  >
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4a855]/20 to-[#d4a855]/5 flex items-center justify-center border border-[#d4a855]/20">
                     <span
                       className="text-2xl font-bold text-[#d4a855]"
                       style={{ fontFamily: 'var(--font-cinzel), serif' }}
                     >
                       8+
                     </span>
-                  </motion.div>
+                  </div>
                   <p className="text-white/80 md:text-lg">Anni di Esperienza</p>
                 </div>
 
@@ -205,24 +136,16 @@ export default function AboutSection() {
                   </p>
                 </div>
 
-                {/* Features Grid with Staggered Animation */}
+                {/* Features Grid */}
                 <div className="grid grid-cols-2 gap-6">
-                  {features.map((feature, index) => (
-                    <motion.div
+                  {features.map((feature) => (
+                    <div
                       key={feature.title}
-                      initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.4, delay: 0.1 * index }}
-                      whileHover={{ x: 5 }}
                       className="flex items-start gap-3 group cursor-default"
                     >
-                      <motion.div
-                        whileHover={{ scale: 1.1, rotate: 5 }}
-                        className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4a855]/20 to-[#d4a855]/5 flex items-center justify-center flex-shrink-0 border border-[#d4a855]/10 group-hover:border-[#d4a855]/30 transition-colors duration-300"
-                      >
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#d4a855]/20 to-[#d4a855]/5 flex items-center justify-center flex-shrink-0 border border-[#d4a855]/10 group-hover:border-[#d4a855]/30 transition-colors duration-300">
                         <feature.icon className="w-5 h-5 text-[#d4a855] transition-transform duration-300 group-hover:scale-110" />
-                      </motion.div>
+                      </div>
                       <div>
                         <h4 className="text-white font-medium text-sm md:text-lg group-hover:text-[#d4a855] transition-colors duration-300">
                           {feature.title}
@@ -231,11 +154,11 @@ export default function AboutSection() {
                           {feature.description}
                         </p>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -258,11 +258,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+        <div
           className="text-center mb-16"
         >
           <p
@@ -293,7 +289,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
               <strong>{avgRating}</strong>/5 basato su <strong>{reviewsCount}</strong> recensioni
             </span>
           </div>
-        </motion.div>
+        </div>
 
         {/* Reviews Carousel - Mobile */}
         <div
@@ -382,12 +378,8 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
         >
           <div className="grid md:grid-cols-2 gap-6">
             {displayReviews.map((review, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
                 className={`card-dark card-hover-lift p-6 relative ${
                   index === currentIndex ? 'ring-2 ring-[#d4a855]/30' : ''
                 }`}
@@ -416,7 +408,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
                     {review.source}
                   </span>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -438,11 +430,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
         </div>
 
         {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <div
           className="text-center mt-12"
         >
           <a
@@ -453,7 +441,7 @@ export default function ReviewsSection({ reviews }: ReviewsSectionProps) {
           >
             Lascia una recensione su Google →
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

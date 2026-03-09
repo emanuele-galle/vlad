@@ -170,7 +170,6 @@ interface AnimatedLineProps {
 }
 
 function AnimatedLine({ direction = 'horizontal', position = 'bottom' }: AnimatedLineProps) {
-  const shouldReduceMotion = useShouldReduceMotion()
   const isHorizontal = direction === 'horizontal'
 
   const positionClasses = {
@@ -180,25 +179,10 @@ function AnimatedLine({ direction = 'horizontal', position = 'bottom' }: Animate
     right: 'right-0 top-0 bottom-0',
   }
 
-  // Su mobile: linea statica
-  if (shouldReduceMotion) {
-    return (
-      <div className={`absolute ${positionClasses[position]} overflow-hidden`}>
-        <div
-          className={`${isHorizontal ? 'h-px w-full' : 'w-px h-full'} bg-gradient-to-r from-transparent via-[#d4a855]/50 to-transparent`}
-        />
-      </div>
-    )
-  }
-
   return (
     <div className={`absolute ${positionClasses[position]} overflow-hidden`}>
-      <motion.div
+      <div
         className={`${isHorizontal ? 'h-px w-full' : 'w-px h-full'} bg-gradient-to-r from-transparent via-[#d4a855]/50 to-transparent`}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1 }}
       />
     </div>
   )
@@ -209,8 +193,6 @@ interface SectionDividerProps {
 }
 
 export function SectionDivider({ variant = 'gradient' }: SectionDividerProps) {
-  const shouldReduceMotion = useShouldReduceMotion()
-
   if (variant === 'simple') {
     return (
       <div className="w-full h-px bg-gradient-to-r from-transparent via-[#d4a855]/30 to-transparent" />
@@ -229,25 +211,11 @@ export function SectionDivider({ variant = 'gradient' }: SectionDividerProps) {
     )
   }
 
-  // Su mobile: versione statica del gradient divider
-  if (shouldReduceMotion) {
-    return (
-      <div className="relative h-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#d4a855]/5 to-transparent" />
-        <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4a855]/40 to-transparent" />
-      </div>
-    )
-  }
-
   return (
     <div className="relative h-24 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#d4a855]/5 to-transparent" />
-      <motion.div
+      <div
         className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#d4a855]/40 to-transparent"
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5, ease: 'easeOut' }}
       />
     </div>
   )

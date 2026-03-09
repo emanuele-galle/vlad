@@ -143,9 +143,9 @@ export default function Header() {
         }`}>
           {/* Logo */}
           <Link href="/" className="shrink-0 relative group">
-            <motion.div
-              animate={{ scale: isScrolled ? 0.85 : 1 }}
-              transition={{ duration: 0.3 }}
+            <div
+              className="transition-transform duration-300"
+              style={{ transform: isScrolled ? 'scale(0.85)' : 'scale(1)' }}
             >
               <Image
                 src="/images/logo/vlad-logo.webp"
@@ -155,7 +155,7 @@ export default function Header() {
                 className="h-10 lg:h-12 w-auto transition-all duration-300"
                 priority
               />
-            </motion.div>
+            </div>
             {/* Subtle glow on hover */}
             <div className="absolute inset-0 bg-[#d4a855]/0 group-hover:bg-[#d4a855]/5 rounded-lg transition-colors duration-300" />
           </Link>
@@ -232,10 +232,9 @@ export default function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <motion.button
-            whileTap={{ scale: 0.95 }}
+          <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors focus-visible:ring-2 focus-visible:ring-[#d4a855] focus-visible:outline-none"
+            className="lg:hidden w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-white/10 transition-colors active:scale-95 focus-visible:ring-2 focus-visible:ring-[#d4a855] focus-visible:outline-none"
             aria-label={isOpen ? 'Chiudi menu' : 'Apri menu'}
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
@@ -263,7 +262,7 @@ export default function Header() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.button>
+          </button>
         </div>
       </div>
 
@@ -298,12 +297,9 @@ export default function Header() {
             >
               <nav className="max-w-7xl mx-auto px-4 py-6">
                 <div className="space-y-1">
-                  {navItems.map((item, index) => (
-                    <motion.div
+                  {navItems.map((item) => (
+                    <div
                       key={item.href}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.05 }}
                     >
                       <Link
                         href={item.href}
@@ -319,15 +315,12 @@ export default function Header() {
                           <div className="w-2 h-2 rounded-full bg-[#d4a855]" />
                         )}
                       </Link>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
 
                 {/* Mobile CTA Section */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
+                <div
                   className="mt-6 pt-6 border-t border-white/10 space-y-4"
                 >
                   {/* Info cards */}
@@ -378,7 +371,7 @@ export default function Header() {
                   <p className="text-center text-white/40 text-sm">
                     Mar-Sab 9-20 | Lun e Dom chiuso
                   </p>
-                </motion.div>
+                </div>
               </nav>
             </motion.div>
           </>
