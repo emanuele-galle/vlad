@@ -118,7 +118,7 @@ export default function AccountPage() {
 
         {/* Google Review CTA */}
         <a
-          href="https://search.google.com/local/writereview?placeid=ChIJh15YSTVFFRMR0Q84QLNKtP4"
+          href="https://search.google.com/local/writereview?placeid=ChIJm79HrcDBhkcRYRj8UqrAHHo"
           target="_blank"
           rel="noopener noreferrer"
           className="block bg-gradient-to-r from-[#1a1a1a] to-[#1f1f1f] border border-[#d4a855]/20 hover:border-[#d4a855]/40 rounded-xl p-5 transition-all group mb-8"

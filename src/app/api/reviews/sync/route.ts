@@ -26,7 +26,7 @@ async function fetchGoogleReviews(): Promise<{ reviews: ApifyReview[]; placeInfo
   const actorId = 'compass~crawler-google-places'
   const runUrl = `https://api.apify.com/v2/acts/${actorId}/runs?token=${APIFY_API_TOKEN}`
 
-  const googleMapsUrl = process.env.GOOGLE_MAPS_URL || 'https://www.google.com/maps/place/Vlad+Barber/@45.4654,9.1659,17z'
+  const googleMapsUrl = process.env.GOOGLE_MAPS_URL || 'https://www.google.com/maps/place/?q=place_id:ChIJm79HrcDBhkcRYRj8UqrAHHo'
 
   const runResponse = await fetch(runUrl, {
     method: 'POST',

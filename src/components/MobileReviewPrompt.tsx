@@ -11,7 +11,7 @@ const DISMISS_DAYS = 14
 const SHOW_DELAY = 8000
 
 const GOOGLE_REVIEW_URL =
-  'https://search.google.com/local/writereview?placeid=ChIJh15YSTVFFRMR0Q84QLNKtP4'
+  'https://search.google.com/local/writereview?placeid=ChIJm79HrcDBhkcRYRj8UqrAHHo'
 
 export default function MobileReviewPrompt() {
   const isMobile = useIsMobile()

@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
         clientName,
         clientEmail,
         customMessage: customMessage || '',
-        reviewUrl: process.env.GOOGLE_REVIEW_URL || 'https://search.google.com/local/writereview?placeid=ChIJh15YSTVFFRMR0Q84QLNKtP4',
+        reviewUrl: process.env.GOOGLE_REVIEW_URL || 'https://search.google.com/local/writereview?placeid=ChIJm79HrcDBhkcRYRj8UqrAHHo',
       }),
     })
 

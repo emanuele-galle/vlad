@@ -19,7 +19,7 @@ export default function GoogleReviewsBadge({
   if (isMobile) return null
 
   const googleReviewUrl =
-    'https://search.google.com/local/writereview?placeid=ChIJh15YSTVFFRMR0Q84QLNKtP4'
+    'https://search.google.com/local/writereview?placeid=ChIJm79HrcDBhkcRYRj8UqrAHHo'
 
   return (
     <motion.a
