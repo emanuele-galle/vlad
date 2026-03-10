@@ -18,17 +18,28 @@ interface Notification {
   timestamp?: number
 }
 
-// LocalStorage key for persisting daily notifications
+// LocalStorage keys for persisting notifications and read state
 const NOTIF_STORAGE_KEY = 'vlad_admin_notifications'
 const NOTIF_DATE_KEY = 'vlad_admin_notif_date'
+const NOTIF_READ_KEY = 'vlad_admin_notif_read'
+
+interface ReadState {
+  readIds: string[]
+  contactsCount: number
+}
+
+function getTodayStr() {
+  return new Date().toISOString().split('T')[0]
+}
 
 function loadPersistedNotifications(): Notification[] {
   if (typeof window === 'undefined') return []
   try {
     const storedDate = localStorage.getItem(NOTIF_DATE_KEY)
-    const today = new Date().toISOString().split('T')[0]
+    const today = getTodayStr()
     if (storedDate !== today) {
       localStorage.removeItem(NOTIF_STORAGE_KEY)
+      localStorage.removeItem(NOTIF_READ_KEY)
       localStorage.setItem(NOTIF_DATE_KEY, today)
       return []
     }
@@ -42,11 +53,42 @@ function loadPersistedNotifications(): Notification[] {
 function persistNotifications(notifs: Notification[]) {
   if (typeof window === 'undefined') return
   try {
-    const today = new Date().toISOString().split('T')[0]
-    localStorage.setItem(NOTIF_DATE_KEY, today)
+    localStorage.setItem(NOTIF_DATE_KEY, getTodayStr())
     const realtime = notifs.filter((n) => ['new_booking', 'cancellation', 'modification'].includes(n.type))
     localStorage.setItem(NOTIF_STORAGE_KEY, JSON.stringify(realtime))
   } catch {}
+}
+
+function loadReadState(): ReadState {
+  if (typeof window === 'undefined') return { readIds: [], contactsCount: 0 }
+  try {
+    const stored = localStorage.getItem(NOTIF_READ_KEY)
+    if (stored) return JSON.parse(stored)
+  } catch {}
+  return { readIds: [], contactsCount: 0 }
+}
+
+function saveReadState(notifications: Notification[], contactsCount: number) {
+  if (typeof window === 'undefined') return
+  try {
+    const state: ReadState = {
+      readIds: notifications.map((n) => n.id),
+      contactsCount,
+    }
+    localStorage.setItem(NOTIF_READ_KEY, JSON.stringify(state))
+  } catch {}
+}
+
+function calcUnreadCount(notifications: Notification[], readState: ReadState, currentContactsCount: number): number {
+  let count = 0
+  for (const n of notifications) {
+    if (n.id === 'contacts-count') {
+      if (currentContactsCount > readState.contactsCount) count++
+    } else if (!readState.readIds.includes(n.id)) {
+      count++
+    }
+  }
+  return count
 }
 
 interface AdminHeaderProps {
@@ -65,6 +107,7 @@ export function AdminHeader({ user }: AdminHeaderProps) {
   const notificationRef = useRef<HTMLDivElement>(null)
   const eventSourceRef = useRef<EventSource | null>(null)
   const isFirstFetchRef = useRef(true)
+  const lastContactsCountRef = useRef(0)
   const pathname = usePathname()
 
   // Play notification sound
@@ -123,14 +166,16 @@ export function AdminHeader({ user }: AdminHeaderProps) {
         })
       }
 
+      lastContactsCountRef.current = data.unreadContacts || 0
+
       setNotifications((prev) => {
         const realtimeNotifs = prev.filter((n) => ['new_booking', 'cancellation', 'modification'].includes(n.type))
         const merged = [...realtimeNotifs, ...notifs]
         persistNotifications(merged)
-        // Set unread count on first load
         if (isFirstFetchRef.current) {
           isFirstFetchRef.current = false
-          setUnreadCount(merged.length)
+          const readState = loadReadState()
+          setUnreadCount(calcUnreadCount(merged, readState, lastContactsCountRef.current))
         }
         return merged
       })
@@ -271,7 +316,10 @@ export function AdminHeader({ user }: AdminHeaderProps) {
               onClick={() => {
                 const willOpen = !notificationsOpen
                 setNotificationsOpen(willOpen)
-                if (willOpen) setUnreadCount(0)
+                if (willOpen) {
+                  setUnreadCount(0)
+                  saveReadState(notifications, lastContactsCountRef.current)
+                }
               }}
               className="relative p-2 text-[rgba(255,255,255,0.6)] hover:text-white transition-colors"
             >
