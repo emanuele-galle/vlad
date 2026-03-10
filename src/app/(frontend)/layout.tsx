@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     template: '%s | Vlad Barber - Barbiere Milano',
   },
   description:
-    'Vlad, barbiere professionista a Milano dal 2025. Taglio capelli uomo, barba, meches e trattamenti personalizzati. Prenota online. Via Domenica Cimarosa 5, 20144 Milano (MI).',
+    'Vlad, barbiere professionista a Milano dal 2021. Taglio capelli uomo, barba, meches e trattamenti personalizzati. Prenota online. Via Domenica Cimarosa 5, 20144 Milano (MI).',
   keywords: [
     'barbiere milano',
     'vlad barbiere',
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     siteName: 'Vlad Barber',
     title: 'Vlad Barber | Barbiere a Milano',
     description:
-      'Vlad, il tuo barbiere di fiducia a Milano dal 2025. Taglio capelli, barba e meches. Prenota online il tuo appuntamento.',
+      'Vlad, il tuo barbiere di fiducia a Milano dal 2021. Taglio capelli, barba e meches. Prenota online il tuo appuntamento.',
   },
   twitter: {
     card: 'summary_large_image',
@@ -107,7 +107,7 @@ const jsonLd = {
   name: 'Vlad Barber',
   alternateName: ['Vlad Barber'],
   description:
-    'Vlad, barbiere professionista a Milano dal 2025. Taglio capelli uomo, barba, meches e trattamenti personalizzati. Prenota online il tuo appuntamento.',
+    'Vlad, barbiere professionista a Milano dal 2021. Taglio capelli uomo, barba, meches e trattamenti personalizzati. Prenota online il tuo appuntamento.',
   url: 'https://vladbarber.it',
   logo: 'https://vladbarber.it/images/logo/vlad-logo.webp',
   image: [

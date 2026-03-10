@@ -62,7 +62,7 @@ export default function HeroSection() {
               textShadow: '0 2px 4px rgba(0, 0, 0, 0.8)',
             }}
           >
-            Tradizione, precisione e passione dal 2025.
+            Tradizione, precisione e passione dal 2021.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

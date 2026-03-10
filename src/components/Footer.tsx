@@ -88,7 +88,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/60 text-sm md:text-base mb-6">
-              Vlad — Il tuo barbiere di fiducia a Milano dal 2025.
+              Vlad — Il tuo barbiere di fiducia a Milano dal 2021.
               Taglio, barba e meches con passione e precisione.
             </p>
             <div className="flex gap-4">
@@ -206,7 +206,7 @@ export default function Footer() {
               />
             </Link>
             <p className="text-white/60 text-sm mb-4">
-              Vlad — Il tuo barbiere dal 2025.
+              Vlad — Il tuo barbiere dal 2021.
             </p>
             <div className="flex justify-center gap-4">
               <a

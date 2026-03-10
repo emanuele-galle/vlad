@@ -126,7 +126,7 @@ export default async function ServiziPage() {
             <div className="w-16 h-0.5 bg-gradient-to-r from-[#d4a855] to-[#e8c882] mx-auto mb-6" />
             <p className="text-white/60 max-w-2xl mx-auto">
               Ogni servizio è eseguito con cura e attenzione ai dettagli da Vlad,
-              barbiere professionista a Milano dal 2025.
+              barbiere professionista a Milano dal 2021.
             </p>
           </div>
 
