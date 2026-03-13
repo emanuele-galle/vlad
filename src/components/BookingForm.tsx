@@ -26,6 +26,7 @@ import {
   type TimeSlot,
   type Appointment,
   type ClosedDay,
+  type OpeningHour,
 } from '@/lib/booking'
 import { useClientAuth } from '@/components/auth/ClientAuthProvider'
 
@@ -35,6 +36,12 @@ interface Service {
   price: number
   duration: number
   shortDescription?: string
+}
+
+interface BookingFormProps {
+  initialServices?: Service[]
+  initialClosedDays?: ClosedDay[]
+  initialOpeningHours?: OpeningHour[]
 }
 
 type Step = 'service' | 'datetime' | 'details' | 'confirm'
@@ -142,7 +149,11 @@ function AnimatedCheckmark() {
 }
 
 // eslint-disable-next-line sonarjs/cognitive-complexity -- Multi-step booking wizard with calendar, slots, form validation, and error handling
-export default function BookingForm() {
+export default function BookingForm({
+  initialServices,
+  initialClosedDays,
+  initialOpeningHours,
+}: BookingFormProps = {}) {
   const { client, isAuthenticated } = useClientAuth()
   const [step, setStep] = useState<Step>('service')
   const [direction, setDirection] = useState(1) // 1 = avanti, -1 = indietro
@@ -169,11 +180,12 @@ export default function BookingForm() {
     }
   }, [isAuthenticated, client])
 
-  // Data from API
-  const [services, setServices] = useState<Service[]>([])
-  const [closedDays, setClosedDays] = useState<ClosedDay[]>([])
-  const [openingHours, setOpeningHours] = useState(defaultOpeningHours)
-  const [isLoadingData, setIsLoadingData] = useState(true)
+  // Data from server props or client fetch fallback
+  const hasInitialData = !!(initialServices && initialServices.length > 0)
+  const [services, setServices] = useState<Service[]>(initialServices || [])
+  const [closedDays, setClosedDays] = useState<ClosedDay[]>(initialClosedDays || [])
+  const [openingHours, setOpeningHours] = useState(initialOpeningHours || defaultOpeningHours)
+  const [isLoadingData, setIsLoadingData] = useState(!hasInitialData)
   const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([])
   const [isLoadingSlots, setIsLoadingSlots] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -181,8 +193,9 @@ export default function BookingForm() {
   const [bookingConfirmed, setBookingConfirmed] = useState(false)
   const [bookingLinks, setBookingLinks] = useState<{ cancel?: string }>({})
 
-  // Fetch services, closed days, and opening hours
+  // Fallback: fetch client-side only if no initial data from server
   useEffect(() => {
+    if (hasInitialData) return
     const controller = new AbortController()
     async function fetchData() {
       setIsLoadingData(true)
@@ -216,7 +229,7 @@ export default function BookingForm() {
     }
     fetchData()
     return () => controller.abort()
-  }, [])
+  }, [hasInitialData])
 
   // Calendar month navigation
   const [calendarMonth, setCalendarMonth] = useState(() => {
